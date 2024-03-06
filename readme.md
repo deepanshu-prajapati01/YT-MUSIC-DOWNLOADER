@@ -12,6 +12,7 @@ Tired of interruptions from ads on Spotify or YouTube? Frustrated with unreliabl
 - **Offline Listening**: Carry your favorite tunes with you and play them anytime, even without an internet connection.
 - **Organized Collection**: Find all your downloaded songs in one dedicated folder.
 - **High-Quality Audio**: Experience music in the best quality available.
+- **User-Friendly Interface**: Navigate with ease thanks to the clean and straightforward UI.
 
 ## 🚫 Limitations to Note:
 
