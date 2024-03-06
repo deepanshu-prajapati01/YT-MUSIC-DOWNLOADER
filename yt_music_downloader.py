@@ -45,10 +45,16 @@ def download_song(song_name):
     yt = YouTube(url, on_progress_callback=on_progress)
     song = yt.streams.filter(only_audio=True).desc().first()
     song.download()
-    return f"{song.default_filename.title()} has been successfully downloaded."
+
+    try:
+      song_name_return = song.default_filename.title()
+    except:
+      song_name_return = song_name
+
+    return f"{song_name_return} has been successfully downloaded."
 
   except Exception as error:
-    return "An unknown error occured during downloading the file.\nPlease report about this to the owner\nError: {error}"
+    return f"An unknown error occured during downloading the file.\nPlease report about this bug to the owner\nError: {error}"
 
 if __name__ == "__main__":
     pass
