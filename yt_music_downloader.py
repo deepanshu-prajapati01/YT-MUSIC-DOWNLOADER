@@ -24,8 +24,9 @@ def download_song(song_name):
 
   # RETREIVING THE URL OF THE VIDEO SONG.
   try:
-    videosSearch = VideosSearch(song_name, limit = 1)
+    videosSearch = VideosSearch(song_name, limit = 5)
     result = videosSearch.result()
+
     url = result['result'][0]['link']
   except Exception as error:
     if error == "[Errno 11001] getaddrinfo failed":
@@ -44,6 +45,8 @@ def download_song(song_name):
   try:
     yt = YouTube(url, on_progress_callback=on_progress)
     song = yt.streams.filter(only_audio=True).desc().first()
+    if song == None:
+      return f"Failed to download the song -> {song_name}"
     song.download()
 
     try:
