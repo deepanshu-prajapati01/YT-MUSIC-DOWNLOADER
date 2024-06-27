@@ -36,7 +36,9 @@ def download_song(song_name):
       return f"Song Name invalid!\nNo search results for the song {song_name}"
 
     else:
-      return f"An unknown error occured during searching for the song.\nPlease report the error to the owner.\nError occured: {error}"
+      message = f"An unknown error occured during searching for the song.\nPlease report the error to the owner.\nError occured: {error}"
+      print(message)
+      return message
 
 
 
@@ -44,10 +46,17 @@ def download_song(song_name):
   # DOWNLOADING THE SONG.
   try:
     yt = YouTube(url, on_progress_callback=on_progress)
-    song = yt.streams.filter(only_audio=True).desc().first()
-    if song == None:
-      return f"Failed to download the song -> {song_name}"
-    song.download()
+    try:
+      song = yt.streams.filter(only_audio=True).desc().first()
+    except Exception as error:
+      return f"Get error while filtering the songs.\nError is: {error}"
+      
+    try:
+      if song == None:
+        return f"Failed to download the song -> {song_name}"
+      song.download()
+    except:
+      return f"Failed to download the song!"
 
     try:
       song_name_return = song.default_filename.title()
@@ -57,7 +66,10 @@ def download_song(song_name):
     return f"{song_name_return} has been successfully downloaded."
 
   except Exception as error:
-    return f"An unknown error occured during downloading the file.\nPlease report about this bug to the owner\nError: {error}"
+    message = f"An unknown error occured during downloading the file.\nPlease report about this bug to the owner\nError: {error}"
+    print(message)
+    return message
 
 if __name__ == "__main__":
-    pass
+    songName = input("Enter the name of the song: ")
+    download_song(songName)
